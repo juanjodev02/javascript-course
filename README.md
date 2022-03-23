@@ -1,1 +1,1 @@
-# Curso de JavaScript 🤘
+# JavaScript Course 🤘
