@@ -42,3 +42,25 @@ if (age) {
 } else {
   console.log('Age is empty');
 }
+
+// Switch - Case
+const day = 'monday'
+
+switch (day) {
+  case 'monday':
+    console.log('Its Monday');
+    break;
+  case 'tuesday':
+    console.log('Its Tuesday');
+    break;
+  default:
+    console.log('Its not a day');
+    break;
+}
+
+// Loops
+// For
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
+
