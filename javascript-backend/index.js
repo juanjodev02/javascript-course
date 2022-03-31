@@ -20,7 +20,7 @@ const {
   divide,
 } = require('./src/math');
 // const chalk = require('chalk');
-const listOfOperation = ['sum', 'subtraction', 'multiply', 'divide'];
+const listOfOperation = ['sum', 'subtraction', 'multiply', 'divide']
 const questionsFirstPart = [
   {
     type: 'number',
