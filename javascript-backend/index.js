@@ -13,13 +13,43 @@
 // limitations under the License.
 
 const math = require('./src/math');
+const chalk = require('chalk');
+const inquirer = require('inquirer');
 
-// functional programming
-const result = math.add(1, 2);
+// ask to user for 2 numbers
 
-// OPP
-const mathLib = new math.Math();
-const classResult = mathLib.add(5, 2);
+const questions =  [
+  {
+    type: 'number',
+    name: 'firstNumber',
+    message: 'Enter the first number: ',
+  },
+  {
+    type: 'number',
+    name: 'secondNumber',
+    message: 'Enter the second number: ',
+  }
+];
 
-console.log(result);
-console.log(classResult);
+inquirer.prompt(questions).then((answers) => {
+  const firstNumber = answers.firstNumber;
+  const secondNumber = answers.secondNumber;
+  const listOfOperations = ['sum'];
+  const question = [
+    {
+      type: 'list',
+      name: 'operation',
+      message: 'Select the operation: ',
+      choices: listOfOperations
+    }
+  ];
+  inquirer.prompt(question).then((result) => {
+    const operation = result.operation;
+    switch(operation) {
+      case 'sum':
+        const result = math.add(firstNumber, secondNumber);
+        console.log(chalk.green(`The result is: ${result}`));
+        break;
+    }
+  })
+})
