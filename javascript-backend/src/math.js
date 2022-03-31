@@ -13,16 +13,36 @@
 // limitations under the License.
 
 const add = (a, b) => {
-  return a + b;
-}
-
-class Math {
-  add (a, b) {
+  if (typeof a === 'number' && typeof b === 'number') {
     return a + b;
   }
-}
+  return 'You must enter two numbers';
+};
+const subtraction = (a, b) => {
+  if (typeof a === 'number' && typeof b === 'number') {
+    return a - b;
+  }
+  return 'You must enter two numbers';
+};
+const multiply = (a, b) => {
+  if (typeof a === 'number' && typeof b === 'number') {
+    return a * b;
+  }
+  return 'You must enter two numbers';
+};
+const divide = (a, b) => {
+  if (typeof a === 'number' && typeof b === 'number') {
+    if (b === 0) {
+      return 'Divide by zero is not valid';
+    }
+    return a / b;
+  }
+  return 'You must enter two numbers';
+};
 
 module.exports = {
   add,
-  Math
-}
+  subtraction,
+  multiply,
+  divide,
+};

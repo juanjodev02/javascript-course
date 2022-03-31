@@ -12,44 +12,69 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const math = require('./src/math');
-const chalk = require('chalk');
 const inquirer = require('inquirer');
-
-// ask to user for 2 numbers
-
-const questions =  [
+const {
+  add,
+  subtraction,
+  multiply,
+  divide,
+} = require('./src/math');
+// const chalk = require('chalk');
+const listOfOperation = ['sum', 'subtraction', 'multiply', 'divide']
+const questionsFirstPart = [
   {
     type: 'number',
     name: 'firstNumber',
-    message: 'Enter the first number: ',
+    message: 'Enter the first number',
   },
   {
     type: 'number',
     name: 'secondNumber',
-    message: 'Enter the second number: ',
-  }
+    message: 'Enter the second number',
+  },
+  {
+    type: 'list',
+    name: 'operation',
+    message: 'Select the operation: ',
+    choices: listOfOperation,
+  },
+];
+const questions = [
+  {
+    type: 'number',
+    name: 'firstNumber',
+    message: 'Enter the first number',
+  },
+  {
+    type: 'number',
+    name: 'secondNumber',
+    message: 'Enter the second number',
+  },
 ];
 
-inquirer.prompt(questions).then((answers) => {
-  const firstNumber = answers.firstNumber;
-  const secondNumber = answers.secondNumber;
-  const listOfOperations = ['sum'];
-  const question = [
-    {
-      type: 'list',
-      name: 'operation',
-      message: 'Select the operation: ',
-      choices: listOfOperations
-    }
-  ];
-  inquirer.prompt(question).then((result) => {
-    const operation = result.operation;
-    switch(operation) {
-      case 'sum':
-        const result = math.add(firstNumber, secondNumber);
-        console.log(chalk.green(`The result is: ${result}`));
+inquirer.prompt(questionsFirstPart)
+  .then((answer) => {
+    const { operation, firstNumber, secondNumber } = answer;
+    let result;
+    switch (operation) {
+      case listOfOperation[0]:
+        result = add(firstNumber, secondNumber);
+        console.log(result);
         break;
+      case listOfOperation[1]:
+        result = subtraction(firstNumber, secondNumber);
+        console.log(result);
+        break;
+      case listOfOperation[2]:
+        result = multiply(firstNumber, secondNumber);        
+        console.log(result);
+        break;
+      case listOfOperation[3]:
+        result = divide(firstNumber, secondNumber);      
+        console.log(result);
+        break;
+      default:
+        return 'Error';
     }
   })
-})
+  .catch((error) => console.log(error));
