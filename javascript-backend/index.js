@@ -66,11 +66,11 @@ inquirer.prompt(questionsFirstPart)
         console.log(result);
         break;
       case listOfOperation[2]:
-        result = multiply(firstNumber, secondNumber);        
+        result = multiply(firstNumber, secondNumber);
         console.log(result);
         break;
       case listOfOperation[3]:
-        result = divide(firstNumber, secondNumber);      
+        result = divide(firstNumber, secondNumber);
         console.log(result);
         break;
       default:
