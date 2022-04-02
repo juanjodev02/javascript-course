@@ -13,25 +13,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { PrismaClient } from "@prisma/client";
+import express from "express";
+import AuthService from "./src/services/auth.service";
 
-const prisma = new PrismaClient();
+const server = express();
+const authService = new AuthService();
 
-prisma.students.findMany().then((students) => {
-  console.log(students);
+server.use(express.json());
+
+server.post("/login", async (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      error: "No body",
+    });
+  }
+
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).send({
+      error: "Missing email or password",
+    });
+  }
+
+  const response = await authService.login(email, password);
+  return res.status(200).send({
+    isLoggedIn: response,
+  });
 });
 
-// prisma.students
-//   .create({
-//     data: {
-//       name: "juanjo",
-//       email: "juan.jaramillo@adatech.dev",
-//       password: "123456",
-//     },
-//   })
-//   .then((student) => {
-//     console.log(student);
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
+// server.post("/register", (req, res) => {});
+
+server.listen(3000, () => {
+  console.log("Server is listening on port 3000");
+});
