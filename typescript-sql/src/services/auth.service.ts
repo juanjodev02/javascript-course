@@ -15,6 +15,12 @@
 
 import { Students, PrismaClient } from "@prisma/client";
 
+type Student = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 class AuthService {
   private prisma: PrismaClient;
 
@@ -38,7 +44,7 @@ class AuthService {
     return true;
   }
 
-  async register(newStudent: Students): Promise<Students> {
+  async register(newStudent: Student): Promise<Students> {
     const student = await this.prisma.students.create({
       data: newStudent,
     });
